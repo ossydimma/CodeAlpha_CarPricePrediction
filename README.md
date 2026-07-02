@@ -76,7 +76,14 @@ Car_Price_Prediction/
 
 ## Data Cleaning Summary
 
-*To be updated after cleaning notebook is complete.*
+- 2 fully identical duplicate rows dropped (301 → 299 rows)
+- One 2008 Activa 3G with 500,000 km dropped as a likely data entry error — a second
+  Activa 3G listing in the dataset shows only 500 km, and 500,000 km implies ~50,000
+  km/year, unrealistic for a private two-wheeler (299 → 298 rows)
+- Rare fuel type (CNG, 2 entries) retained — valid data, not a quality issue; small
+  sample size deferred to feature engineering/modelling
+- No missing values, no dtype corrections needed
+- Final dataset: 298 rows x 9 columns, saved to `data/processed/car_clean.csv`
 
 ---
 
