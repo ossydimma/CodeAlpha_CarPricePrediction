@@ -89,7 +89,15 @@ Car_Price_Prediction/
 
 ## Feature Engineering Summary
 
-*To be updated after feature engineering is complete.*
+- Car_Age created (2018 - Year); Year dropped to resolve perfect collinearity
+- Selling_type and Transmission binary-encoded (0/1)
+- Fuel_Type one-hot encoded into 3 columns (CNG, Diesel, Petrol)
+- Car_Name dropped (98 unique values, too sparse for 298 rows); Brand and
+  Brand_Freq were engineered and tested but ultimately dropped — the grouping
+  conflated cars and two-wheelers instead of capturing manufacturer, and
+  correlation with Selling_Price was weak (-0.1158)
+- Owner left unchanged (already numeric and ordinal)
+- Final dataset: 298 rows x 10 columns, all numeric, saved to `data/processed/car_features.csv`
 
 ---
 

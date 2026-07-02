@@ -47,7 +47,7 @@ A Car_Age feature will be engineered during feature engineering.
 EDA — distributions, price depreciation by age and mileage,
 impact of fuel type, transmission, and seller type on price.
 
-## 2026-07-02
+## 2026-07-01
 
 Completed EDA for Car Price Prediction (02_eda.ipynb).
 
@@ -104,3 +104,30 @@ learn CNG-specific patterns; deferred to feature engineering/modelling.
 ### Next step
 Feature engineering — create Car_Age, resolve Year/Car_Age collinearity, and encode
 Fuel_Type, Selling_type, and Transmission.
+
+## 2026-07-02
+
+Completed feature engineering for Car Price Prediction (04_feature_engineering.ipynb).
+
+### Car_Age
+Created as 2018 - Year. Dropped Year afterward to resolve the perfect collinearity
+flagged during EDA.
+
+### Encoding
+Selling_type and Transmission binary-encoded. Fuel_Type one-hot encoded (3 columns).
+
+### Car_Name / Brand — dropped after investigation
+Tried reducing Car_Name (98 unique values) to Brand (44 categories) via first-word
+extraction, then frequency-encoded it. Checked correlation with Selling_Price
+(-0.1158, weak) and inspected the groupby breakdown — found the grouping wasn't
+capturing real manufacturer identity, it was mixing cars and two-wheelers (Bajaj,
+Royal Enfield, Hero, TVS, Yamaha vs. city, corolla, fortuner), consistent with the
+Activa 3G finding from data cleaning. Dropped Car_Name, Brand, and Brand_Freq —
+Present_Price already captures vehicle type/segment more precisely.
+
+### Final dataset
+298 rows x 10 columns, all numeric, 0 missing values. Saved to
+../data/processed/car_features.csv.
+
+### Next step
+Modelling — baseline model, then LightGBM with Optuna tuning.
