@@ -63,7 +63,14 @@ Car_Price_Prediction/
 
 ## Key Findings from EDA
 
-*To be updated after EDA notebook is complete.*
+- Selling_Price is right-skewed (mean 4.66 Lakhs, max 35.00) — log transform confirmed necessary for modelling
+- **Present_Price is the strongest predictor** — correlation of 0.879 with Selling_Price
+- Car_Age shows a clear negative relationship with price; Driven_kms shows a noisier negative relationship
+- Diesel cars sell for a median of 7.75 Lakhs vs 2.65 for Petrol
+- Automatic transmission commands a premium over Manual (5.80 vs 3.25 median)
+- Dealer-sold cars have a far higher median price than Individual sellers (5.25 vs 0.515) — the largest categorical split in the dataset
+- Depreciation ranges from 1.07% to 89.46% — the lowest belongs to a near-new car, confirming Present_Price >= Selling_Price holds across the full dataset
+- Year and Car_Age are perfectly collinear by construction — only Car_Age will be kept for modelling
 
 ---
 

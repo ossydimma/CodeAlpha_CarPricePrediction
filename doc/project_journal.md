@@ -46,3 +46,34 @@ A Car_Age feature will be engineered during feature engineering.
 ### Next step
 EDA — distributions, price depreciation by age and mileage,
 impact of fuel type, transmission, and seller type on price.
+
+## 2026-07-02
+
+Completed EDA for Car Price Prediction (02_eda.ipynb).
+
+### Distributions
+Selling_Price and Present_Price are both right-skewed, confirming the log transform
+flagged during data understanding. log(Selling_Price) is visibly closer to symmetric
+(mean 0.91, range -2.30 to 3.56).
+
+Driven_kms confirmed the 500,000km outlier stands out clearly and in isolation from
+the rest of the distribution — will need a decision in cleaning (cap, remove, or keep).
+
+### Price relationships
+Present_Price vs Selling_Price correlation is 0.879 — by far the strongest predictor
+in the dataset. Car_Age shows a clear negative relationship with Selling_Price, as
+expected. Driven_kms shows a negative relationship too but noisier.
+
+### Categorical effects
+Diesel cars have double the median selling price of Petrol (7.75 vs 2.65).
+Automatic transmission commands a premium over Manual (5.80 vs 3.25).
+Dealer-sold cars have a far higher median price than Individual-sold (5.25 vs 0.515) —
+this is the largest categorical split found and worth exploring in feature engineering.
+
+### Multicollinearity noted
+Year and Car_Age are perfectly inversely correlated by construction (Car_Age = 2018 -
+Year). Only one will be kept for modelling — Car_Age, since it's more interpretable.
+
+### Next step
+Data cleaning — drop 2 duplicate rows, investigate the 500,000km Driven_kms outlier
+and the negative-depreciation row, decide on CNG (2 entries: merge or drop).
