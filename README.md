@@ -103,7 +103,20 @@ Car_Price_Prediction/
 
 ## Results
 
-*To be updated after modelling is complete.*
+Final model: **CatBoost** (tuned via Optuna, 50 trials, 5-fold CV)
+
+| Model | RMSE (Lakhs) | R² |
+|-------|--------------|-----|
+| CatBoost (tuned) | 1.1961 | 0.9346 |
+| CatBoost (default) | 1.4259 | 0.9039 |
+| Linear Regression | 1.8399 | 0.8579 |
+| Mean Baseline | 4.9402 | -0.0132 |
+
+Tuning reduced RMSE by 16.1% over default CatBoost parameters. Present_Price is by
+far the strongest predictor (78.2% feature importance), followed by Car_Age (11.7%).
+
+Best parameters: `depth=3, iterations=527, learning_rate=0.1343, l2_leaf_reg=6.74,
+min_data_in_leaf=11`
 
 ---
 
@@ -112,10 +125,10 @@ Car_Price_Prediction/
 | Phase | Notebook | Status |
 |-------|----------|--------|
 | Data understanding | 01_data_understanding.ipynb | ✅ Complete |
-| Exploratory analysis | 02_eda.ipynb | ⏳ Pending |
-| Data cleaning | 03_data_cleaning.ipynb | ⏳ Pending |
-| Feature engineering | 04_feature_engineering.ipynb | ⏳ Pending |
-| Modelling | 05_modelling.ipynb | ⏳ Pending |
+| Exploratory analysis | 02_eda.ipynb | ✅ Complete |
+| Data cleaning | 03_data_cleaning.ipynb | ✅ Complete |
+| Feature engineering | 04_feature_engineering.ipynb | ✅ Complete |
+| Modelling | 05_modelling.ipynb | ✅ Complete |
 | Evaluation | 06_evaluation.ipynb | ⏳ Pending |
 
 ---

@@ -131,3 +131,36 @@ Present_Price already captures vehicle type/segment more precisely.
 
 ### Next step
 Modelling — baseline model, then LightGBM with Optuna tuning.
+
+## 2026-07-03
+
+Completed modelling for Car Price Prediction (05_modelling.ipynb).
+
+### Evaluation strategy
+Used 5-fold CV as the primary metric rather than a single holdout — 298 rows makes
+a single train/val split too small to trust on its own.
+
+### Target transform
+Tested raw vs log1p(Selling_Price) target. CatBoost handled both fine (raw slightly
+better: RMSE 1.43 vs 1.55). Linear Regression on the log target broke down
+completely (R² -53.43) — unbounded predictions amplified into huge errors after
+expm1(). Good example of why tree-based models can be more robust to a transform
+choice than linear ones. Raw target used going forward.
+
+### Hyperparameter tuning
+Ran Optuna (50 trials, 5-fold CV RMSE objective) on CatBoost. Worthwhile — RMSE
+improved 16.1% (1.4259 → 1.1961), R² 0.9039 → 0.9346. Not a marginal result on a
+dataset this size.
+
+### Feature importance
+Present_Price (78.2%) and Car_Age (11.7%) account for ~90% of the model's decisions
+— matches the EDA finding that Present_Price is the strongest single predictor.
+
+### Final model
+CatBoost, tuned params (depth=3, iterations=527, learning_rate=0.1343,
+l2_leaf_reg=6.74, min_data_in_leaf=11), fit on full dataset. Saved to
+../models/catboost_model.cbm.
+
+### Next step
+Evaluation — residual analysis, error distribution by price range, business
+interpretation.
