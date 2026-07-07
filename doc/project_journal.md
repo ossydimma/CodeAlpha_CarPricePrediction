@@ -164,3 +164,39 @@ l2_leaf_reg=6.74, min_data_in_leaf=11), fit on full dataset. Saved to
 ### Next step
 Evaluation — residual analysis, error distribution by price range, business
 interpretation.
+
+## 2026-07-06
+
+Completed evaluation for Car Price Prediction (06_evaluation.ipynb).
+
+### Out-of-fold evaluation
+Built OOF predictions across the same 5-fold CV structure used in modelling, since
+the saved final_model was fit on all 298 rows and can't be evaluated on its own
+training data. RMSE 1.3556, R² 0.9258, MAE 0.6364 — the pooled OOF RMSE is higher
+than the 1.1961 reported in modelling because that number was an average of
+per-fold RMSEs, not RMSE on pooled predictions. Averaging per-fold RMSEs
+underestimates true error (Jensen's inequality) — OOF pooled RMSE is the more
+honest number.
+
+### Residuals and price bands
+Residuals vs predicted shows increasing variance at higher predicted prices.
+Price-band RMSE confirms this concretely: 0.256 (Low) to 2.299 (High), a ~9x spread.
+The model is very strong on economy/mid-range cars and weaker on premium ones.
+
+### Worst/best predictions
+Worst errors cluster around high-Present_Price vehicles. Best predictions are
+almost all low-Present_Price economy cars, several within a few thousand rupees.
+
+### SHAP
+Confirms Present_Price and Car_Age as dominant, with expected direction (higher
+Present_Price -> higher predicted price, higher Car_Age -> lower predicted price).
+
+### Business takeaway
+Model is reliable for typical used-car pricing (the bulk of any real market).
+Recommend flagging predictions above ~10 Lakhs for human review rather than
+treating them as final, given the error pattern found here.
+
+### Project status
+All 6 notebooks complete. Remaining: final README polish, LinkedIn post, and
+possibly src/features.py extraction for predict.py to avoid train/serve skew
+(flagged during feature engineering discussion).

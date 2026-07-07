@@ -120,6 +120,26 @@ min_data_in_leaf=11`
 
 ---
 
+## Model Evaluation
+
+Out-of-fold RMSE: **1.3556 Lakhs** | R²: **0.9258** | MAE: **0.6364 Lakhs**
+
+| Price Band | MAE | RMSE | Count |
+|------------|-----|------|-------|
+| Low | 0.172 | 0.256 | 76 |
+| Mid-Low | 0.463 | 0.914 | 73 |
+| Mid-High | 0.671 | 1.145 | 77 |
+| High | 1.266 | 2.299 | 72 |
+
+The model performs excellently on mainstream/budget cars and is meaningfully less
+precise on premium vehicles (RMSE grows ~9x from the cheapest to most expensive
+quartile) — a natural consequence of limited high-value examples in a 298-row
+dataset. SHAP confirms Present_Price and Car_Age as the two dominant drivers of
+every prediction. **Recommended use:** trust predictions directly under ~10 Lakhs;
+treat predictions above that as directional and flag for human review.
+
+---
+
 ## Workflow
 
 | Phase | Notebook | Status |
@@ -129,7 +149,7 @@ min_data_in_leaf=11`
 | Data cleaning | 03_data_cleaning.ipynb | ✅ Complete |
 | Feature engineering | 04_feature_engineering.ipynb | ✅ Complete |
 | Modelling | 05_modelling.ipynb | ✅ Complete |
-| Evaluation | 06_evaluation.ipynb | ⏳ Pending |
+| Evaluation | 06_evaluation.ipynb | ✅ Complete |
 
 ---
 
