@@ -163,7 +163,7 @@ Both reported at default scale and on log-transformed target.
 
 ## Tools and Libraries
 
-Python · pandas · numpy · matplotlib · seaborn · scikit-learn · LightGBM · joblib
+Python · pandas · numpy · matplotlib · seaborn · scikit-learn · catboost · optuna . shap
 
 ---
 
